@@ -4,19 +4,31 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="main.css" />
+		<link rel="stylesheet" href="css/main.css" />
 		<title>Mine Sweeper</title>
 	</head>
-	<body>
-		<h1>Mine Sweeper</h1>
-		<p class="score">Score</p>
-		<button class="restart-btn">Smiley</button>
-		<p class="time">Time</p>
-		<p class="lives">Lives</p>
-		<table>
+	<body onload="init()">
+		<section class="header">
+			<h1 class="title">Mine Sweeper</h1>
+			<p class="time">Time: <span>0</span> Seconds</p>
+			<div class="flex-wrapper">
+				<p class="score">Score: <span>0</span></p>
+				<button class="btn restart-btn">Smiley</button>
+				<p class="lives">Lives: <span>3</span></p>
+			</div>
+		</section>
+		<section class="levels">
+			<button class="btn level-btn size-4" onclick="changeLevel(this)">4 X 4</button>
+			<button class="btn level-btn size-8" onclick="changeLevel(this)">8 X 8</button>
+			<button class="btn level-btn size-12" onclick="changeLevel(this)">12 X 12</button>
+		</section>
+		<table border="1">
 			<tbody class="board"></tbody>
 		</table>
-		<div class="footer">Dandan Drori &copy; copyright 2021</div>
+		<div class="footer">
+			<p>Dandan Drori &copy; copyright 2021</p>
+		</div>
+		<script src="js/utils.js"></script>
 		<script src="js/main.js"></script>
 	</body>
 </html>

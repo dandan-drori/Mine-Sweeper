@@ -1,3 +1,91 @@
 :root {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+*,
+*::after,
+*::before {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	background-color: black;
+	color: white;
+}
+
+.header {
+	display: flex;
+	flex-direction: column;
+	padding: 1rem 0;
+}
+
+.title {
+	margin: 0 auto;
+}
+
+.time {
+	margin: 2rem auto;
+}
+
+.flex-wrapper {
+	display: flex;
+	justify-content: space-around;
+}
+
+.score {
+}
+
+.lives {
+}
+
+.btn {
+	cursor: pointer;
+}
+
+.restart-btn {
+}
+
+.levels {
+	display: flex;
+	justify-content: center;
+	margin: 3rem 0;
+}
+
+.level-btn {
+	margin: 0 3rem;
+	padding: 0.3rem 0.9rem;
+	width: 6rem;
+}
+
+table {
+	background-color: #aaa;
+	margin: 0 auto;
+}
+
+.cell {
+	width: 40px;
+	height: 40px;
+	text-align: center;
+	font-size: 1.5em;
+	cursor: pointer;
+	outline-width: 1px;
+	outline-style: outset;
+	outline-color: white;
+}
+
+img {
+	width: 30px;
+	height: 30px;
+}
+
+.footer {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	height: 9rem;
+	width: 100%;
+	border: 1px solid white;
+	padding: 1rem;
 }
