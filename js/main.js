@@ -311,10 +311,7 @@ function handleLocalStorage() {
 
 function getLevelHighscore(size) {
 	var highscores = localStorage.getItem('highscores')
-	if (!highscores) {
-		document.querySelector('.highscore span').innerText = "Couldn't get highscore"
-		return
-	}
+	if (!highscores) return 0
 	var parsedHighscores = JSON.parse(highscores)
 	var highscore = parsedHighscores[`size${size}`]
 	return highscore
