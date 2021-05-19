@@ -8,23 +8,24 @@
 		<title>Mine Sweeper</title>
 	</head>
 	<body onload="init()">
-		<section class="header">
-			<h1 class="title">Mine Sweeper</h1>
-			<p class="time">Time: <span>0</span> Seconds</p>
-			<div class="flex-wrapper">
-				<p class="score">Score: <span>0</span></p>
-				<button class="btn restart-btn">Smiley</button>
-				<p class="lives">Lives: <span>3</span></p>
-			</div>
-		</section>
+		<h1 class="title">Mine Sweeper</h1>
 		<section class="levels">
 			<button class="btn level-btn size-4" onclick="changeLevel(this)">4 X 4</button>
 			<button class="btn level-btn size-8" onclick="changeLevel(this)">8 X 8</button>
 			<button class="btn level-btn size-12" onclick="changeLevel(this)">12 X 12</button>
 		</section>
+		<section class="header">
+			<p class="time">Time: <span>0</span> Seconds</p>
+			<div class="flex-wrapper">
+				<p class="score">Score: <span>0</span></p>
+				<button class="btn restart-btn" onclick="restartGame()">😃</button>
+				<p class="lives">Lives: <span>3</span></p>
+			</div>
+		</section>
 		<table border="1">
 			<tbody class="board"></tbody>
 		</table>
+		<div class="highscore">highscore: <span>0</span></div>
 		<div class="footer">
 			<p>Dandan Drori &copy; copyright 2021</p>
 		</div>

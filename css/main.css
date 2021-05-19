@@ -19,14 +19,17 @@ body {
 	display: flex;
 	flex-direction: column;
 	padding: 1rem 0;
+	margin-bottom: 1rem;
 }
 
 .title {
-	margin: 0 auto;
+	margin-top: 1rem;
+	text-align: center;
 }
 
 .time {
-	margin: 2rem auto;
+	margin: 1rem auto;
+	margin-top: 0;
 }
 
 .flex-wrapper {
@@ -35,9 +38,11 @@ body {
 }
 
 .score {
+	width: 8rem;
 }
 
 .lives {
+	width: 8rem;
 }
 
 .btn {
@@ -45,12 +50,14 @@ body {
 }
 
 .restart-btn {
+	padding: 0.1rem;
+	font-size: 1.5em;
 }
 
 .levels {
 	display: flex;
 	justify-content: center;
-	margin: 3rem 0;
+	margin: 2rem 0;
 }
 
 .level-btn {
@@ -80,11 +87,16 @@ img {
 	height: 30px;
 }
 
+.highscore {
+	text-align: center;
+	margin-top: 2rem;
+}
+
 .footer {
 	position: absolute;
 	left: 0;
 	bottom: 0;
-	height: 9rem;
+	height: 3.5rem;
 	width: 100%;
 	border: 1px solid white;
 	padding: 1rem;
