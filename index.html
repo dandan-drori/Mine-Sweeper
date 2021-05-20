@@ -9,26 +9,60 @@
 	</head>
 	<body onload="init()">
 		<h1 class="title">Mine Sweeper</h1>
-		<section class="levels">
-			<button class="btn level-btn size-4" onclick="changeLevel(this)">4 X 4</button>
-			<button class="btn level-btn size-8" onclick="changeLevel(this)">8 X 8</button>
-			<button class="btn level-btn size-12" onclick="changeLevel(this)">12 X 12</button>
-		</section>
+
+		<div class="flex-wrapper flex-wrapper--header">
+			<section class="safe-click" onclick="activateSafeClick()">
+				<div>Safe Click</div>
+				<div>(<span class="remaining">3</span> Remaining)</div>
+			</section>
+
+			<section class="levels">
+				<button class="btn level-btn size-4" onclick="changeLevel(this)">4 X 4</button>
+				<button class="btn level-btn size-8" onclick="changeLevel(this)">8 X 8</button>
+				<button class="btn level-btn size-12" onclick="changeLevel(this)">12 X 12</button>
+			</section>
+
+			<section class="hints">
+				<span>Hints: </span>
+
+				<div class="hint">
+					<img class="lightbulb lightbulb1" src="img/lightbulb.png" onclick="activateHint(1)" />
+				</div>
+
+				<div class="hint">
+					<img class="lightbulb lightbulb2" src="img/lightbulb.png" onclick="activateHint(2)" />
+				</div>
+
+				<div class="hint">
+					<img class="lightbulb lightbulb3" src="img/lightbulb.png" onclick="activateHint(3)" />
+				</div>
+			</section>
+		</div>
+
 		<section class="header">
 			<p class="time">Time: <span>0</span> Seconds</p>
-			<div class="flex-wrapper">
+
+			<div class="flex-wrapper flex-wrapper--game">
 				<p class="score">Score: <span>0</span></p>
 				<button class="btn restart-btn" onclick="restartGame()">😃</button>
 				<p class="lives">Lives: <span></span></p>
 			</div>
 		</section>
+
 		<table border="1">
 			<tbody class="board"></tbody>
 		</table>
-		<div class="highscore">highscore: <span>0</span></div>
-		<div class="footer">
+
+		<div class="highscore">Highscore: <span>0</span></div>
+
+		<footer>
 			<p>Dandan Drori &copy; copyright 2021</p>
+		</footer>
+
+		<div class="win-modal">
+			<img src="img/giphy.gif" alt="confetti" />
 		</div>
+
 		<script src="js/utils.js"></script>
 		<script src="js/main.js"></script>
 	</body>
