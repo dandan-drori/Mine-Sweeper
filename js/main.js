@@ -1,6 +1,6 @@
-const MINE = '<img src="img/mine.png" alt="flag">'
+const MINE = '<img class="mine" src="img/mine.png" alt="flag">'
 const EMPTY = ''
-const FLAG = '<img src="img/flag.png" alt="flag">'
+const FLAG = '<img class="flag" src="img/flag.png" alt="flag">'
 
 var gBoard
 var gLevel
@@ -81,11 +81,7 @@ function cellClicked(elCell, i, j) {
 	if (!gGame.isOn) return
 	var cell = gBoard[i][j]
 	if (cell.isShown) return
-	console.log('gIsManualMode', gIsManualMode)
-	console.log('gLevel.PLACED_MINES', gLevel.PLACED_MINES)
-	console.log('gLevel.MINES', gLevel.MINES)
 	if (gIsManualMode && gLevel.PLACED_MINES < gLevel.MINES) {
-		debugger
 		useManualMode(elCell, i, j)
 		gLevel.PLACED_MINES++
 		return
@@ -108,8 +104,10 @@ function cellClicked(elCell, i, j) {
 	if (cell.isMarked) return
 	if (!cell.minesAround && !cell.isMine) expandShown(i, j)
 
+	saveToHistory(`${i},${j}-isShown`, false, 'click')
 	cell.isShown = true
 	gGame.shownCount++
+	saveToHistory('score', false, 'click')
 	updateScore(1)
 	renderCell(elCell, cell)
 	var victoryStatus = isVictory()
@@ -174,6 +172,7 @@ function expandShown(rowIdx, colIdx) {
 			if (i === rowIdx && j === colIdx) continue
 			var cell = gBoard[i][j]
 			if (!cell.isVisited && !cell.isShown && !cell.isMarked && !cell.minesAround) expandShown(i, j)
+			saveToHistory(`${i},${j}-isShown`, false)
 			cell.isShown = true
 			var className = getClassName(i, j)
 			var elCell = document.querySelector(`.${className}`)
@@ -264,6 +263,8 @@ function handleReRender(size, mines) {
 		score: 0,
 		hints: 3,
 		safeClicks: 3,
+		history: [],
+		relatedChanges: 0,
 	}
 	clearInterval(gTimeInterval)
 	gIsFirstClick = true
@@ -292,9 +293,31 @@ function handleReRender(size, mines) {
 		elLightbulbs[i].src = 'img/lightbulb.png'
 		elLightbulbs[i].setAttribute('onclick', `activateHint(${i + 1})`)
 	}
+
+	var elCells = document.querySelectorAll('.cell')
+	if (size === 4) {
+		for (var i = 0; i < elCells.length; i++) {
+			elCells[i].style.fontSize = '1.4em'
+			elCells[i].style.width = '30px'
+			elCells[i].style.height = '30px'
+		}
+	} else if (size === 8) {
+		for (var i = 0; i < elCells.length; i++) {
+			elCells[i].style.fontSize = '0.9em'
+			elCells[i].style.width = '20px'
+			elCells[i].style.height = '20px'
+		}
+	} else {
+		for (var i = 0; i < elCells.length; i++) {
+			elCells[i].style.fontSize = '0.9em'
+			elCells[i].style.width = '20px'
+			elCells[i].style.height = '20px'
+		}
+	}
 }
 
 function mineClicked(elCell, cell) {
+	saveToHistory('lives', false)
 	gGame.lives--
 	elLives = document.querySelector('.lives span')
 	var strHtml = ''
@@ -490,20 +513,45 @@ function saveIsShown(rowIdx, colIdx) {
 	return isCellsShown
 }
 
-function undo() {
-	// undo cell properties
-	// re-render cell
+function saveToHistory(key, value) {
+	var action = {}
+	action[key] = value
+	gGame.history.push(action)
+}
 
-	// undo lives
-	// undo
-	gGame = {
-		isOn: true,
-		shownCount: 0,
-		markedCount: 0,
-		secsPassed: 0,
-		lives: 3,
-		score: 0,
-		hints: 3,
-		safeClicks: 3,
+function undoAction() {
+	if (!gGame.history.length) return
+	var lastAction = gGame.history.pop()
+	var action = Object.keys(lastAction)[0]
+	if (action === 'lives') {
+		actions = gGame.history.splice(gGame.history.length - 3, 3)
+	}
+	var value = lastAction[action]
+	if (action.includes(',')) {
+		var location = action.split('-')[0]
+		var property = action.split('-')[1]
+		var row = location.split(',')[0]
+		var col = location.split(',')[1]
+		var cell = gBoard[+row][+col]
+		if (property === 'isShown') {
+			cell.isShown = value
+		}
+		var className = getClassName(row, col)
+		var elCell = document.querySelector(`.${className}`)
+		renderCell(elCell, cell)
+	}
+	if (action === 'lives') {
+		gGame.lives++
+		elLives = document.querySelector('.lives span')
+		var strHtml = ''
+		for (var i = 0; i < gGame.lives; i++) {
+			strHtml += '❤️ '
+		}
+		elLives.innerHTML = strHtml
+	}
+	if (action === 'score') {
+		gGame.score--
+		var elScore = document.querySelector('.score span')
+		elScore.innerText = gGame.score
 	}
 }

@@ -19,7 +19,6 @@ body {
 .header {
 	display: flex;
 	flex-direction: column;
-	padding: 1rem 0;
 	margin-bottom: 0.5rem;
 }
 
@@ -90,20 +89,18 @@ body {
 table {
 	background-color: #aaa;
 	margin: 0 auto;
-	width: 350px;
-	height: 350px;
+	width: 300px;
+	height: 300px;
 }
 
 .cell {
-	width: 20px;
-	height: 20px;
+	width: 30px;
+	height: 30px;
 	text-align: center;
-	font-size: 0.9em;
+	font-size: 1.4em;
 	cursor: pointer;
 	font-weight: bold;
-	outline-width: 1px;
-	outline-style: outset;
-	outline-color: white;
+	border-style: outset;
 }
 
 img {
@@ -179,6 +176,22 @@ footer {
 	animation: blink 1000ms linear;
 }
 
+.manual-mode-btn {
+	padding: 0.7rem 1.9rem;
+	border-radius: 0.7rem;
+	background-color: lightsalmon;
+	font-size: 1em;
+	width: 7rem;
+}
+
+.undo-btn {
+	padding: 0.7rem 1.9rem;
+	border-radius: 0.7rem;
+	background-color: orange;
+	font-size: 1em;
+	width: 7rem;
+}
+
 @keyframes blink {
 	0% {
 		background-color: #aaa;
@@ -199,7 +212,7 @@ footer {
 
 @media only screen and (max-width: 768px) {
 	:root {
-		font-size: 1.2em;
+		font-size: 1.6em;
 	}
 
 	table {
