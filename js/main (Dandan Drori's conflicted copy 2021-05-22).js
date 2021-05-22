@@ -227,7 +227,7 @@ function showMines() {
 
 function isVictory() {
 	for (var i = 0; i < gBoard.length; i++) {
-		for (var j = 0; j < gBoard.length; j++) {
+		for (var j = 0; j < gBoard[0].length; j++) {
 			var cell = gBoard[i][j]
 			// all the mines are flagged,and all the other cells are shown
 			// if theres a mine that is not flagged, or a cell that is not shown
